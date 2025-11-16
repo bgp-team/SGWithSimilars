@@ -1,265 +1,626 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WordPress Sync</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 20px;
-    }
-    .container {
-        background: white;
-        padding: 40px;
-        border-radius: 15px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        text-align: left;
-        max-width: 600px;
-        width: 100%;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-    h1 {
-        color: #333;
-        margin-bottom: 30px;
-        text-align: center;
-    }
-    .section {
-        background: #f8f9fa;
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        border-left: 4px solid #667eea;
-    }
-    .section h3 {
-        margin-top: 0;
-        margin-bottom: 15px;
-        color: #667eea;
-        font-size: 16px;
-        font-weight: bold;
-    }
-    label {
-        display: block;
-        margin-top: 12px;
-        font-weight: 600;
-        color: #333;
-        font-size: 14px;
-    }
-    label:first-of-type {
-        margin-top: 0;
-    }
-    input, textarea {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border-radius: 6px;
-        border: 1px solid #ccc;
-        font-size: 14px;
-        box-sizing: border-box;
-        transition: border-color 0.3s;
-    }
-    input:focus, textarea:focus {
-        outline: none;
-        border-color: #667eea;
-    }
-    input:required:invalid {
-        border-color: #dc3545;
-    }
-    textarea {
-        height: 200px;
-        resize: vertical;
-        font-family: Arial, sans-serif;
-    }
-    button {
-        background: #667eea;
-        color: white;
-        border: none;
-        padding: 15px 30px;
-        font-size: 16px;
-        font-weight: bold;
-        border-radius: 8px;
-        cursor: pointer;
-        width: 100%;
-        margin-top: 20px;
-        transition: background 0.3s;
-    }
-    button:hover:not(:disabled) { background: #5568d3; }
-    button:disabled { background: #ccc; cursor: not-allowed; }
-    .status {
-        margin-top: 20px;
-        padding: 15px;
-        border-radius: 8px;
-        display: none;
-    }
-    .status.show { display: block; }
-    .status.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-    .status.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-    .status.loading { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
-    .required-note {
-        color: #666;
-        font-size: 13px;
-        font-style: italic;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Main Game</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .required-note {
+            color: #666;
+            font-size: 13px;
+            font-style: italic;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        h2 {
+            color: #555;
+            font-size: 20px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-similar {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #28a745;
+        }
+        .section-similar h3 {
+            color: #28a745;
+            margin-top: 0;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+        }
+        label .optional {
+            font-weight: normal;
+            color: #888;
+            font-size: 12px;
+            font-style: italic;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        input[type="file"] {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .faq-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 3px solid #667eea;
+        }
+        .faq-item h3 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            color: #333;
+        }
+        button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-weight: 500;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .collapsible {
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-top: 20px;
+            transition: background 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .collapsible:hover {
+            background: #5568d3;
+        }
+        .collapsible:after {
+            content: '\002B';
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .collapsible.active:after {
+            content: "\2212";
+        }
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #f8f9fa;
+            border-radius: 0 0 8px 8px;
+        }
+        .collapsible-content-inner {
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1>🚀 Publish Main Game</h1>
-    
-    <p class="required-note">* Tous les champs sont obligatoires</p>
-
-    <!-- Section 1: Connexion -->
-    <div class="section">
-        <h3>🔐 Informations de connexion</h3>
+    <div class="container">
+        <h1>🎮 Add Game</h1>
+        <p class="required-note">* All required fields must be filled</p>
         
-        <label for="urlWebsite">URL Website *</label>
-        <input type="url" id="urlWebsite" placeholder="https://example.com" required>
-
-        <label for="username">Username *</label>
-        <input type="text" id="username" placeholder="Votre nom d'utilisateur" required>
-
-        <label for="password">Password *</label>
-        <input type="password" id="password" placeholder="Votre mot de passe" required>
-    </div>
-
-    <!-- Section 2: Informations du jeu -->
-    <div class="section">
-        <h3>🎮 Informations du jeu</h3>
-        
-        <label for="title">Game Name *</label>
-        <input type="text" id="title" placeholder="Nom du jeu" required>
-
-        <label for="meta">Meta Description *</label>
-        <input type="text" id="meta" placeholder="Meta description ou tags" required>
-
-        <label for="iframe">Iframe *</label>
-        <input type="text" id="iframe" placeholder="Iframe URL ou code" required>
-    </div>
-
-    <!-- Section 3: Jeux similaires -->
-    <div class="section">
-        <h3>🕹️ Similar Games</h3>
-        
-        <label for="similarGame1">Similar Game 1 *</label>
-        <input type="text" id="similarGame1" placeholder="Nom du premier jeu similaire" required>
-
-        <label for="similarGame2">Similar Game 2 *</label>
-        <input type="text" id="similarGame2" placeholder="Nom du deuxième jeu similaire" required>
-    </div>
-
-    <!-- Section 4: Contenu -->
-    <div class="section">
-        <h3>📝 Content</h3>
-        
-        <label for="content">Contenu du post *</label>
-        <textarea id="content" placeholder="Contenu complet du post..." required></textarea>
-    </div>
-
-    <button id="syncBtn" onclick="triggerSync()">Publier</button>
-    <div id="status" class="status"></div>
-</div>
-
-<script>
-const WEBHOOK_URL = 'https://n8n.srv1053791.hstgr.cloud/webhook-test/a86e8092-fb27-4ae3-a005-0b3ac688cb97';
-
-async function triggerSync() {
-    const button = document.getElementById('syncBtn');
-    const status = document.getElementById('status');
-
-    // Vérifier que tous les champs obligatoires sont remplis
-    const form = document.querySelector('.container');
-    const inputs = form.querySelectorAll('input[required], textarea[required]');
-    let isValid = true;
-
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            isValid = false;
-            input.style.borderColor = '#dc3545';
-        } else {
-            input.style.borderColor = '#ccc';
-        }
-    });
-
-    if (!isValid) {
-        status.className = 'status error show';
-        status.textContent = '❌ Veuillez remplir tous les champs obligatoires';
-        return;
-    }
-
-    button.disabled = true;
-    button.textContent = 'Synchronisation en cours...';
-    status.className = 'status loading show';
-    status.textContent = '⏳ Traitement en cours...';
-
-    try {
-        // Construction du payload JSON
-        const payload = {
-            urlWebsite: document.getElementById('urlWebsite').value.trim(),
-            username: document.getElementById('username').value.trim(),
-            password: document.getElementById('password').value.trim(),
-            title: document.getElementById('title').value.trim(),
-            meta: document.getElementById('meta').value.trim(),
-            iframe: document.getElementById('iframe').value.trim(),
-            content: document.getElementById('content').value.trim(),
-            similarGame1: document.getElementById('similarGame1').value.trim(),
-            similarGame2: document.getElementById('similarGame2').value.trim(),
-            triggered_by: 'client',
-            timestamp: new Date().toISOString()
-        };
-
-        const response = await fetch(WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            status.className = 'status success show';
-            status.textContent = '✅ ' + (data.message || 'Publication réussie !');
+        <form id="gameForm">
+            <h2>📋 Main Game Information</h2>
             
-            // Réinitialiser le formulaire après succès
-            setTimeout(() => {
-                if (confirm('Publication réussie ! Voulez-vous réinitialiser le formulaire ?')) {
-                    form.querySelectorAll('input, textarea').forEach(input => input.value = '');
-                    status.className = 'status';
-                }
-            }, 2000);
-        } else {
-            throw new Error(data.message || 'Erreur lors de la publication');
-        }
-    } catch (error) {
-        status.className = 'status error show';
-        status.textContent = '❌ Erreur : ' + error.message;
-    } finally {
-        button.disabled = false;
-        button.textContent = 'Publier';
-    }
-}
+            <div class="form-group">
+                <label>Game Name *</label>
+                <input type="text" id="gameName" required>
+            </div>
 
-// Validation en temps réel
-document.addEventListener('DOMContentLoaded', () => {
-    const inputs = document.querySelectorAll('input[required], textarea[required]');
-    inputs.forEach(input => {
-        input.addEventListener('blur', () => {
-            if (!input.value.trim()) {
-                input.style.borderColor = '#dc3545';
-            } else {
-                input.style.borderColor = '#28a745';
+            <div class="form-group">
+                <label>Meta Description *</label>
+                <textarea id="metaDescription" required placeholder="SEO meta description for the game..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Author Name *</label>
+                <input type="text" id="authorName" required>
+            </div>
+
+            <div class="form-group">
+                <label>Iframe URL *</label>
+                <input type="url" id="iframeUrl" required placeholder="https://example.com/game">
+            </div>
+
+            <div class="form-group">
+                <label>Post Content *</label>
+                <textarea id="content" required placeholder="Full post content..." style="min-height: 150px;"></textarea>
+            </div>
+
+            <h2>🔐 Website & Credentials</h2>
+
+            <div class="form-group">
+                <label>Website URL *</label>
+                <input type="url" id="websiteUrl" required placeholder="https://yourwebsite.com">
+            </div>
+
+            <div class="form-group">
+                <label>Username *</label>
+                <input type="text" id="username" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password *</label>
+                <input type="password" id="password" required>
+            </div>
+
+            <h2>🌐 Additional URLs</h2>
+
+            <div class="form-group">
+                <label>Wikipedia Game URL <span class="optional">(optional)</span></label>
+                <input type="url" id="wikipediaGameUrl" placeholder="https://wikipedia.org/wiki/...">
+            </div>
+
+            <div class="form-group">
+                <label>App Store URL *</label>
+                <input type="url" id="appStoreUrl" required placeholder="https://apps.apple.com/...">
+            </div>
+
+            <div class="form-group">
+                <label>Google Play URL *</label>
+                <input type="url" id="googlePlayUrl" required placeholder="https://play.google.com/...">
+            </div>
+
+            <h2>👨‍💻 Developer Information</h2>
+
+            <div class="form-group">
+                <label>Developer Name *</label>
+                <input type="text" id="developerName" required>
+            </div>
+
+            <div class="form-group">
+                <label>Wikipedia Developer URL <span class="optional">(optional)</span></label>
+                <input type="url" id="wikipediaDeveloperUrl" placeholder="https://wikipedia.org/wiki/...">
+            </div>
+
+            <div class="form-group">
+                <label>Twitter Developer URL <span class="optional">(optional)</span></label>
+                <input type="url" id="twitterDeveloperUrl" placeholder="https://twitter.com/...">
+            </div>
+
+            <h2>🖼️ Main Game Images</h2>
+
+            <div class="form-group">
+                <label>Logo Image *</label>
+                <input type="file" id="logoImage" accept="image/*" required>
+            </div>
+
+            <div class="form-group">
+                <label>Favicon Image *</label>
+                <input type="file" id="faviconImage" accept="image/*" required>
+            </div>
+
+            <div class="form-group">
+                <label>Post Image *</label>
+                <input type="file" id="postImage" accept="image/*" required>
+            </div>
+
+            <div class="form-group">
+                <label>Thumbnail Image *</label>
+                <input type="file" id="thumbnailImage" accept="image/*" required>
+            </div>
+
+            <!-- SIMILAR GAME 1 -->
+            <button type="button" class="collapsible">🎯 Similar Game 1 <span class="optional">(optional)</span></button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <div class="section-similar">
+                        <h3>🎮 Similar Game 1 Details</h3>
+                        
+                        <div class="form-group">
+                            <label>Game Name <span class="optional">(optional)</span></label>
+                            <input type="text" id="similarGame1Name" placeholder="Enter similar game name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Meta Description <span class="optional">(optional)</span></label>
+                            <textarea id="similarGame1MetaDesc" placeholder="SEO meta description..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Iframe URL <span class="optional">(optional)</span></label>
+                            <input type="url" id="similarGame1Iframe" placeholder="https://example.com/game">
+                        </div>
+
+                        <div class="form-group">
+                            <label>App Store URL <span class="optional">(optional)</span></label>
+                            <input type="url" id="similarGame1AppStore" placeholder="https://apps.apple.com/...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Google Play URL <span class="optional">(optional)</span></label>
+                            <input type="url" id="similarGame1GooglePlay" placeholder="https://play.google.com/...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Content <span class="optional">(optional)</span></label>
+                            <textarea id="similarGame1Content" placeholder="Game description and content..." style="min-height: 120px;"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Thumbnail Image <span class="optional">(optional)</span></label>
+                            <input type="file" id="similarGame1Thumbnail" accept="image/*">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Post Image <span class="optional">(optional)</span></label>
+                            <input type="file" id="similarGame1PostImage" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIMILAR GAME 2 -->
+            <button type="button" class="collapsible">🎯 Similar Game 2 <span class="optional">(optional)</span></button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <div class="section-similar">
+                        <h3>🎮 Similar Game 2 Details</h3>
+                        
+                        <div class="form-group">
+                            <label>Game Name <span class="optional">(optional)</span></label>
+                            <input type="text" id="similarGame2Name" placeholder="Enter similar game name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Meta Description <span class="optional">(optional)</span></label>
+                            <textarea id="similarGame2MetaDesc" placeholder="SEO meta description..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Iframe URL <span class="optional">(optional)</span></label>
+                            <input type="url" id="similarGame2Iframe" placeholder="https://example.com/game">
+                        </div>
+
+                        <div class="form-group">
+                            <label>App Store URL <span class="optional">(optional)</span></label>
+                            <input type="url" id="similarGame2AppStore" placeholder="https://apps.apple.com/...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Google Play URL <span class="optional">(optional)</span></label>
+                            <input type="url" id="similarGame2GooglePlay" placeholder="https://play.google.com/...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Content <span class="optional">(optional)</span></label>
+                            <textarea id="similarGame2Content" placeholder="Game description and content..." style="min-height: 120px;"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Thumbnail Image <span class="optional">(optional)</span></label>
+                            <input type="file" id="similarGame2Thumbnail" accept="image/*">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Post Image <span class="optional">(optional)</span></label>
+                            <input type="file" id="similarGame2PostImage" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ SECTION -->
+            <button type="button" class="collapsible">❓ FAQ Section <span class="optional">(optional)</span></button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <div class="faq-item">
+                        <h3>FAQ 1</h3>
+                        <div class="form-group">
+                            <label>Question 1 <span class="optional">(optional)</span></label>
+                            <input type="text" id="faqQuestion1">
+                        </div>
+                        <div class="form-group">
+                            <label>Answer 1 <span class="optional">(optional)</span></label>
+                            <textarea id="faqAnswer1"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>FAQ 2</h3>
+                        <div class="form-group">
+                            <label>Question 2 <span class="optional">(optional)</span></label>
+                            <input type="text" id="faqQuestion2">
+                        </div>
+                        <div class="form-group">
+                            <label>Answer 2 <span class="optional">(optional)</span></label>
+                            <textarea id="faqAnswer2"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>FAQ 3</h3>
+                        <div class="form-group">
+                            <label>Question 3 <span class="optional">(optional)</span></label>
+                            <input type="text" id="faqQuestion3">
+                        </div>
+                        <div class="form-group">
+                            <label>Answer 3 <span class="optional">(optional)</span></label>
+                            <textarea id="faqAnswer3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn">🚀 Send Game Data</button>
+        </form>
+
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        // 🔥 PUT YOUR N8N WEBHOOK URL HERE
+        const WEBHOOK_URL = 'https://n8n.srv1053791.hstgr.cloud/webhook/123087d9-ebc3-47da-8e5d-99a750b7f5c8';
+
+        const form = document.getElementById('gameForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const message = document.getElementById('message');
+
+        // Collapsible sections
+        const collapsibles = document.getElementsByClassName("collapsible");
+        for (let i = 0; i < collapsibles.length; i++) {
+            collapsibles[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                const content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+
+        // Convert file to Base64
+        async function toBase64(file) {
+            return new Promise((resolve, reject) => {
+                if (!file) return resolve(null);
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+            });
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ Sending...';
+            message.style.display = 'none';
+
+            try {
+                // Get main game files
+                const logoFile = document.getElementById('logoImage').files[0];
+                const faviconFile = document.getElementById('faviconImage').files[0];
+                const postFile = document.getElementById('postImage').files[0];
+                const thumbnailFile = document.getElementById('thumbnailImage').files[0];
+
+                // Get similar game 1 files
+                const sg1ThumbnailFile = document.getElementById('similarGame1Thumbnail').files[0];
+                const sg1PostFile = document.getElementById('similarGame1PostImage').files[0];
+
+                // Get similar game 2 files
+                const sg2ThumbnailFile = document.getElementById('similarGame2Thumbnail').files[0];
+                const sg2PostFile = document.getElementById('similarGame2PostImage').files[0];
+
+                // Convert to base64
+                const logoBase64 = await toBase64(logoFile);
+                const faviconBase64 = await toBase64(faviconFile);
+                const postBase64 = await toBase64(postFile);
+                const thumbnailBase64 = await toBase64(thumbnailFile);
+
+                const sg1ThumbnailBase64 = await toBase64(sg1ThumbnailFile);
+                const sg1PostBase64 = await toBase64(sg1PostFile);
+
+                const sg2ThumbnailBase64 = await toBase64(sg2ThumbnailFile);
+                const sg2PostBase64 = await toBase64(sg2PostFile);
+
+                // Build FAQ array
+                const faqItems = [];
+                for (let i = 1; i <= 3; i++) {
+                    const question = document.getElementById(`faqQuestion${i}`).value.trim();
+                    const answer = document.getElementById(`faqAnswer${i}`).value.trim();
+                    
+                    if (question && answer) {
+                        faqItems.push({ question, answer });
+                    }
+                }
+
+                // Build Similar Game 1 object
+                const similarGame1 = {
+                    gameName: document.getElementById('similarGame1Name').value.trim() || null,
+                    metaDescription: document.getElementById('similarGame1MetaDesc').value.trim() || null,
+                    iframeUrl: document.getElementById('similarGame1Iframe').value.trim() || null,
+                    appStoreUrl: document.getElementById('similarGame1AppStore').value.trim() || null,
+                    googlePlayUrl: document.getElementById('similarGame1GooglePlay').value.trim() || null,
+                    content: document.getElementById('similarGame1Content').value.trim() || null,
+                    thumbnailImage: sg1ThumbnailBase64,
+                    postImage: sg1PostBase64
+                };
+
+                // Build Similar Game 2 object
+                const similarGame2 = {
+                    gameName: document.getElementById('similarGame2Name').value.trim() || null,
+                    metaDescription: document.getElementById('similarGame2MetaDesc').value.trim() || null,
+                    iframeUrl: document.getElementById('similarGame2Iframe').value.trim() || null,
+                    appStoreUrl: document.getElementById('similarGame2AppStore').value.trim() || null,
+                    googlePlayUrl: document.getElementById('similarGame2GooglePlay').value.trim() || null,
+                    content: document.getElementById('similarGame2Content').value.trim() || null,
+                    thumbnailImage: sg2ThumbnailBase64,
+                    postImage: sg2PostBase64
+                };
+
+                // Build JSON payload
+                const payload = {
+                    gameName: document.getElementById('gameName').value,
+                    metaDescription: document.getElementById('metaDescription').value,
+                    authorName: document.getElementById('authorName').value,
+                    iframeUrl: document.getElementById('iframeUrl').value,
+                    websiteUrl: document.getElementById('websiteUrl').value,
+                    wikipediaGameUrl: document.getElementById('wikipediaGameUrl').value || null,
+                    appStoreUrl: document.getElementById('appStoreUrl').value,
+                    googlePlayUrl: document.getElementById('googlePlayUrl').value,
+                    developerName: document.getElementById('developerName').value,
+                    wikipediaDeveloperUrl: document.getElementById('wikipediaDeveloperUrl').value || null,
+                    twitterDeveloperUrl: document.getElementById('twitterDeveloperUrl').value || null,
+                    username: document.getElementById('username').value,
+                    password: document.getElementById('password').value,
+                    content: document.getElementById('content').value,
+                    logoImage: logoBase64,
+                    faviconImage: faviconBase64,
+                    postImage: postBase64,
+                    thumbnailImage: thumbnailBase64,
+                    similarGame1: similarGame1.gameName ? similarGame1 : null,
+                    similarGame2: similarGame2.gameName ? similarGame2 : null,
+                    faq: faqItems.length > 0 ? faqItems : null,
+                    triggered_by: 'client',
+                    timestamp: new Date().toISOString()
+                };
+
+                // Send JSON to n8n
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    showMessage('✅ Game sent successfully!', 'success');
+                    form.reset();
+                    // Clear file inputs
+                    ['logoImage','faviconImage','postImage','thumbnailImage',
+                     'similarGame1Thumbnail','similarGame1PostImage',
+                     'similarGame2Thumbnail','similarGame2PostImage'].forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) el.value = '';
+                    });
+                    // Close all collapsible sections
+                    for (let i = 0; i < collapsibles.length; i++) {
+                        collapsibles[i].classList.remove("active");
+                        collapsibles[i].nextElementSibling.style.maxHeight = null;
+                    }
+                } else {
+                    throw new Error('Error while sending');
+                }
+            } catch (error) {
+                showMessage('❌ Error: ' + error.message, 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = '🚀 Send Game Data';
             }
         });
-    });
-});
-</script>
+
+        function showMessage(text, type) {
+            message.textContent = text;
+            message.className = 'message ' + type;
+            message.style.display = 'block';
+            
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 5000);
+        }
+    </script>
 </body>
 </html>
