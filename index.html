@@ -49,14 +49,14 @@
             gap: 10px;
         }
         .section-similar {
-            background: #f8f9fa;
+            background: #fff3cd;
             padding: 20px;
             border-radius: 10px;
             margin: 20px 0;
-            border-left: 4px solid #28a745;
+            border-left: 4px solid #ffc107;
         }
         .section-similar h3 {
-            color: #28a745;
+            color: #856404;
             margin-top: 0;
             font-size: 18px;
             display: flex;
@@ -198,7 +198,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🎮 Add Game</h1>
+        <h1>🎮 Add Main Game With Similars</h1>
         <p class="required-note">* All required fields must be filled</p>
         
         <form id="gameForm">
@@ -211,7 +211,7 @@
 
             <div class="form-group">
                 <label>Meta Description *</label>
-                <textarea id="metaDescription" required placeholder="SEO meta description for the game..."></textarea>
+                <textarea id="metaDescription" required placeholder="Meta description for the game..."></textarea>
             </div>
 
             <div class="form-group">
@@ -302,108 +302,8 @@
                 <input type="file" id="thumbnailImage" accept="image/*" required>
             </div>
 
-            <!-- SIMILAR GAME 1 -->
-            <button type="button" class="collapsible">🎯 Similar Game 1 <span class="optional">(optional)</span></button>
-            <div class="collapsible-content">
-                <div class="collapsible-content-inner">
-                    <div class="section-similar">
-                        <h3>🎮 Similar Game 1 Details</h3>
-                        
-                        <div class="form-group">
-                            <label>Game Name <span class="optional">(optional)</span></label>
-                            <input type="text" id="similarGame1Name" placeholder="Enter similar game name">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Meta Description <span class="optional">(optional)</span></label>
-                            <textarea id="similarGame1MetaDesc" placeholder="SEO meta description..."></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Iframe URL <span class="optional">(optional)</span></label>
-                            <input type="url" id="similarGame1Iframe" placeholder="https://example.com/game">
-                        </div>
-
-                        <div class="form-group">
-                            <label>App Store URL <span class="optional">(optional)</span></label>
-                            <input type="url" id="similarGame1AppStore" placeholder="https://apps.apple.com/...">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Google Play URL <span class="optional">(optional)</span></label>
-                            <input type="url" id="similarGame1GooglePlay" placeholder="https://play.google.com/...">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Content <span class="optional">(optional)</span></label>
-                            <textarea id="similarGame1Content" placeholder="Game description and content..." style="min-height: 120px;"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Thumbnail Image <span class="optional">(optional)</span></label>
-                            <input type="file" id="similarGame1Thumbnail" accept="image/*">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Post Image <span class="optional">(optional)</span></label>
-                            <input type="file" id="similarGame1PostImage" accept="image/*">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SIMILAR GAME 2 -->
-            <button type="button" class="collapsible">🎯 Similar Game 2 <span class="optional">(optional)</span></button>
-            <div class="collapsible-content">
-                <div class="collapsible-content-inner">
-                    <div class="section-similar">
-                        <h3>🎮 Similar Game 2 Details</h3>
-                        
-                        <div class="form-group">
-                            <label>Game Name <span class="optional">(optional)</span></label>
-                            <input type="text" id="similarGame2Name" placeholder="Enter similar game name">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Meta Description <span class="optional">(optional)</span></label>
-                            <textarea id="similarGame2MetaDesc" placeholder="SEO meta description..."></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Iframe URL <span class="optional">(optional)</span></label>
-                            <input type="url" id="similarGame2Iframe" placeholder="https://example.com/game">
-                        </div>
-
-                        <div class="form-group">
-                            <label>App Store URL <span class="optional">(optional)</span></label>
-                            <input type="url" id="similarGame2AppStore" placeholder="https://apps.apple.com/...">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Google Play URL <span class="optional">(optional)</span></label>
-                            <input type="url" id="similarGame2GooglePlay" placeholder="https://play.google.com/...">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Content <span class="optional">(optional)</span></label>
-                            <textarea id="similarGame2Content" placeholder="Game description and content..." style="min-height: 120px;"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Thumbnail Image <span class="optional">(optional)</span></label>
-                            <input type="file" id="similarGame2Thumbnail" accept="image/*">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Post Image <span class="optional">(optional)</span></label>
-                            <input type="file" id="similarGame2PostImage" accept="image/*">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ SECTION -->
-            <button type="button" class="collapsible">❓ FAQ Section <span class="optional">(optional)</span></button>
+            <!-- FAQ MAIN GAME -->
+            <button type="button" class="collapsible">❓ FAQ Main Game <span class="optional">(optional)</span></button>
             <div class="collapsible-content">
                 <div class="collapsible-content-inner">
                     <div class="faq-item">
@@ -439,6 +339,108 @@
                         <div class="form-group">
                             <label>Answer 3 <span class="optional">(optional)</span></label>
                             <textarea id="faqAnswer3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIMILAR GAME 1 (Required) -->
+            <h2 style="margin-top: 40px;">🎯 Similar Games</h2>
+            
+            <button type="button" class="collapsible">🎮 Similar Game 1 *</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <div class="section-similar">
+                        <h3>🎮 Similar Game 1 Details</h3>
+                        
+                        <div class="form-group">
+                            <label>Game Name *</label>
+                            <input type="text" id="similarGame1Name" required placeholder="Enter similar game name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Meta Description *</label>
+                            <textarea id="similarGame1MetaDesc" required placeholder="Meta description..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Iframe URL *</label>
+                            <input type="url" id="similarGame1Iframe" required placeholder="https://example.com/game">
+                        </div>
+
+                        <div class="form-group">
+                            <label>App Store URL *</label>
+                            <input type="url" id="similarGame1AppStore" required placeholder="https://apps.apple.com/...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Google Play URL *</label>
+                            <input type="url" id="similarGame1GooglePlay" required placeholder="https://play.google.com/...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Content *</label>
+                            <textarea id="similarGame1Content" required placeholder="Game description and content..." style="min-height: 120px;"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Thumbnail Image *</label>
+                            <input type="file" id="similarGame1Thumbnail" accept="image/*" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Post Image *</label>
+                            <input type="file" id="similarGame1PostImage" accept="image/*" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIMILAR GAME 2 (Required) -->
+            <button type="button" class="collapsible">🎮 Similar Game 2 *</button>
+            <div class="collapsible-content">
+                <div class="collapsible-content-inner">
+                    <div class="section-similar">
+                        <h3>🎮 Similar Game 2 Details</h3>
+                        
+                        <div class="form-group">
+                            <label>Game Name *</label>
+                            <input type="text" id="similarGame2Name" required placeholder="Enter similar game name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Meta Description *</label>
+                            <textarea id="similarGame2MetaDesc" required placeholder="Meta description..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Iframe URL *</label>
+                            <input type="url" id="similarGame2Iframe" required placeholder="https://example.com/game">
+                        </div>
+
+                        <div class="form-group">
+                            <label>App Store URL *</label>
+                            <input type="url" id="similarGame2AppStore" required placeholder="https://apps.apple.com/...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Google Play URL *</label>
+                            <input type="url" id="similarGame2GooglePlay" required placeholder="https://play.google.com/...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Content *</label>
+                            <textarea id="similarGame2Content" required placeholder="Game description and content..." style="min-height: 120px;"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Thumbnail Image *</label>
+                            <input type="file" id="similarGame2Thumbnail" accept="image/*" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Post Image *</label>
+                            <input type="file" id="similarGame2PostImage" accept="image/*" required>
                         </div>
                     </div>
                 </div>
@@ -528,26 +530,26 @@
                     }
                 }
 
-                // Build Similar Game 1 object
+                // Build Similar Game 1 object (required)
                 const similarGame1 = {
-                    gameName: document.getElementById('similarGame1Name').value.trim() || null,
-                    metaDescription: document.getElementById('similarGame1MetaDesc').value.trim() || null,
-                    iframeUrl: document.getElementById('similarGame1Iframe').value.trim() || null,
-                    appStoreUrl: document.getElementById('similarGame1AppStore').value.trim() || null,
-                    googlePlayUrl: document.getElementById('similarGame1GooglePlay').value.trim() || null,
-                    content: document.getElementById('similarGame1Content').value.trim() || null,
+                    gameName: document.getElementById('similarGame1Name').value,
+                    metaDescription: document.getElementById('similarGame1MetaDesc').value,
+                    iframeUrl: document.getElementById('similarGame1Iframe').value,
+                    appStoreUrl: document.getElementById('similarGame1AppStore').value,
+                    googlePlayUrl: document.getElementById('similarGame1GooglePlay').value,
+                    content: document.getElementById('similarGame1Content').value,
                     thumbnailImage: sg1ThumbnailBase64,
                     postImage: sg1PostBase64
                 };
 
-                // Build Similar Game 2 object
+                // Build Similar Game 2 object (required)
                 const similarGame2 = {
-                    gameName: document.getElementById('similarGame2Name').value.trim() || null,
-                    metaDescription: document.getElementById('similarGame2MetaDesc').value.trim() || null,
-                    iframeUrl: document.getElementById('similarGame2Iframe').value.trim() || null,
-                    appStoreUrl: document.getElementById('similarGame2AppStore').value.trim() || null,
-                    googlePlayUrl: document.getElementById('similarGame2GooglePlay').value.trim() || null,
-                    content: document.getElementById('similarGame2Content').value.trim() || null,
+                    gameName: document.getElementById('similarGame2Name').value,
+                    metaDescription: document.getElementById('similarGame2MetaDesc').value,
+                    iframeUrl: document.getElementById('similarGame2Iframe').value,
+                    appStoreUrl: document.getElementById('similarGame2AppStore').value,
+                    googlePlayUrl: document.getElementById('similarGame2GooglePlay').value,
+                    content: document.getElementById('similarGame2Content').value,
                     thumbnailImage: sg2ThumbnailBase64,
                     postImage: sg2PostBase64
                 };
@@ -572,8 +574,8 @@
                     faviconImage: faviconBase64,
                     postImage: postBase64,
                     thumbnailImage: thumbnailBase64,
-                    similarGame1: similarGame1.gameName ? similarGame1 : null,
-                    similarGame2: similarGame2.gameName ? similarGame2 : null,
+                    similarGame1: similarGame1,
+                    similarGame2: similarGame2,
                     faq: faqItems.length > 0 ? faqItems : null,
                     triggered_by: 'client',
                     timestamp: new Date().toISOString()
